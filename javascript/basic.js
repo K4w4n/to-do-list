@@ -1,3 +1,5 @@
+let tarefaAnterior;
+let tarefaSelecionada;
 class TaskList {
     #concluido;
     constructor(titulo, tasks) {
@@ -7,7 +9,7 @@ class TaskList {
     addTask(task) {
         this.tasks.unshift(task);
         registrarInfo(mainList);
-        renderizarNaTela(rendenrizeTaskList(mainList));
+        renderizarNaTela(rendenrizeTaskList(tarefaSelecionada), tarefaSelecionada);
         return true;
     }
     removeTask(task) {
@@ -19,7 +21,7 @@ class TaskList {
 
         this.tasks.splice(indexTask, 1);
         registrarInfo(mainList);
-        renderizarNaTela(rendenrizeTaskList(mainList));
+        renderizarNaTela(rendenrizeTaskList(tarefaSelecionada), tarefaSelecionada);
         return true;
     }
     concluir() {
@@ -47,7 +49,7 @@ class Task {
         if (!this.concluido) {
             this.concluido = true;
             registrarInfo(mainList);
-            renderizarNaTela(rendenrizeTaskList(mainList));
+            renderizarNaTela(rendenrizeTaskList(tarefaSelecionada), tarefaSelecionada);
             return true;
         } else {
             return false;
@@ -57,7 +59,7 @@ class Task {
         if (this.concluido) {
             this.concluido = false;
             registrarInfo(mainList);
-            renderizarNaTela(rendenrizeTaskList(mainList));
+            renderizarNaTela(rendenrizeTaskList(tarefaSelecionada), tarefaSelecionada);
             return true;
         } else {
             return false;
@@ -78,13 +80,21 @@ function rendenrizeTask(task, taskList) {
     }
     const checkeboxVisual = document.createElement('div');
     checkeboxVisual.classList.add('checkebox-visual');
-    checkeboxVisual.addEventListener('click', event => {
-        if (task.concluido) {
-            task.desConcluir();
-        } else {
-            task.concluir();
-        }
-    })
+    if (task.tasks) {
+        checkeboxVisual.addEventListener('click', event => {
+            tarefaSelecionada = task;
+            renderizarNaTela(rendenrizeTaskList(task), task);
+        });
+    } else {
+        checkeboxVisual.addEventListener('click', event => {
+            if (task.concluido) {
+                task.desConcluir();
+            } else {
+                task.concluir();
+            }
+        });
+    }
+
 
     const titleArea = document.createElement('div');
     titleArea.classList.add('title-area');
@@ -111,6 +121,20 @@ function rendenrizeTask(task, taskList) {
 
     const labelAbrir = document.createElement('label');
     labelAbrir.appendChild(document.createTextNode('Abrir'));
+    labelAbrir.addEventListener('click', event => {
+        if (task.tasks) {
+            tarefaSelecionada = task;
+            renderizarNaTela(rendenrizeTaskList(tarefaSelecionada), tarefaSelecionada);
+        } else {
+            const taskListSubstituta = new TaskList(task.titulo)
+            taskList.tasks[taskList.tasks.indexOf(task)] = taskListSubstituta;
+            task = taskListSubstituta
+            tarefaSelecionada = task;
+            renderizarNaTela(rendenrizeTaskList(tarefaSelecionada), tarefaSelecionada);
+            registrarInfo(mainList);
+        }
+    })
+
 
     const labelEditar = document.createElement('label');
     labelEditar.appendChild(document.createTextNode('Editar'));
@@ -199,7 +223,18 @@ function rendenrizeTaskList(taskList) {
     }));
 }
 
-function renderizarNaTela(taskRenderizada) {
+function renderizarNaTela(taskRenderizada, taskList) {
+    const btnVoltar = document.querySelector('.btn-voltar');
+    if (taskList == mainList) {
+        btnVoltar.classList.add('disable');
+        btnVoltar.classList.remove('ative');
+    } else {
+        btnVoltar.classList.add('ative');
+        btnVoltar.classList.remove('disable');
+    }
+    btnVoltar.addEventListener('click', event => {
+        location.reload();
+    })
     const taskListHTML = document.querySelector('.task-list');
     taskListHTML.innerHTML = '';
     if (Array.isArray(taskRenderizada)) {
@@ -211,12 +246,13 @@ function renderizarNaTela(taskRenderizada) {
     }
 
     const tituloLista = document.querySelector('.titulo-lista');
-    tituloLista.innerText = mainList.titulo;
+    tituloLista.innerText = taskList.titulo;
 }
 
 const mainList = carregarInfo();
+tarefaSelecionada = mainList;
 
-renderizarNaTela(rendenrizeTaskList(mainList));
+renderizarNaTela(rendenrizeTaskList(mainList), mainList);
 
 const menuHumburguer = document.querySelector('.humburguer');
 menuHumburguer.addEventListener('click', (event) => {
