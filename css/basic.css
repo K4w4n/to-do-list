@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    border-style: solid;
+    border-width: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #8B8FC2;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.header>.btn-voltar, .header>.humburguer {
+    height: 50%;
+    width: auto;
+}
+
+.header>.humburguer {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* ajustar responsividade aqui */
+
+.checkebox-visual {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px 0px 0px 10px;
+    border-width: 2px;
+    border-color: #fff;
+    cursor: pointer;
+}
+
+.task {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 7px;
+}
+
+.config {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 21px;
+    cursor: pointer;
+    position: relative
+}
+
+.title-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 0px 10px 10px 0px;
+    border-width: 2px 2px 2px 0px;
+    border-color: #fff;
+    background-color: rgb(255, 255, 255);
+}
+
+.titulo-tarefa {
+    margin-left: 5px;
+    color: #8B8FC2;
+}
+
+.bola {
+    border-radius: 100%;
+    background-color: #8B8FC2;
+    width: 5px;
+    height: 5px;
+}
+
+.linha {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 5px 1px 1px 1px;
+}
+
+.linha-vertical-1, .linha-vertical-2 {
+    width: 20px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.linha-vertical-1 {
+    transform: rotate(-45deg);
+    margin-bottom: 8px;
+}
+
+.linha-vertical-2 {
+    transform: rotate(45deg);
+    margin-top: 8px;
+}
+
+.btn-voltar {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.titulo-lista {
+    color: #fff;
+}
+
+.menu-config {
+    position: absolute;
+    width: 100px;
+    top: -10px;
+    left: -120px;
+    display: flex;
+    flex-direction: column;
+    /* 
+    border-width: 1px;
+    border-color: #7070707a; */
+    box-shadow: rgba(0, 0, 0, 0.479) -5px 4px 10px;
+    background-color: rgb(255, 255, 255);
+}
+
+.menu-config>label {
+    text-align: center;
+    padding: 2px;
+}
+
+.menu-config>label:hover {
+    background-color: #d3d3d3;
+}
+
+.disable {
+    visibility: hidden;
+}
+
+.ative {
+    visibility: visible;
+}
+
+.task-list {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.menu-aberto>.linha:nth-child(1) {
+    margin-top: 5px;
+    transform: rotate(45deg);
+}
+
+.menu-aberto>.linha:nth-child(2) {
+    margin-top: 5px;
+    visibility: hidden;
+}
+
+.menu-aberto>.linha:nth-child(3) {
+    margin-top: 5px;
+    transform: rotate(-45deg);
+    position: relative;
+    top: -18px;
+}
+
+.menu-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 50%;
+    height: 94%;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.623);
+    z-index: 1;
+    backdrop-filter: blur(10px);
+}
+
+.menu-aberto>.menu-list {
+    visibility: visible;
+}
+
+.menu-fechado>.menu-list {
+    visibility: hidden;
+}
+
+.menu-list>li {
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+}
+
+.menu-list>li:hover {
+    background-color: rgba(255, 255, 255, 0.616);
+}
+
+.checked>.checkebox-visual {
+    border-color: #fff;
+    background-color: #fff;
+}
+
+.checked>.title-area {
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.checked>.title-area>.config>.bola {
+    background-color: #fff;
+}
+
+.checked>.title-area>.titulo-tarefa {
+    color: #fff;
+}
+
+@media only screen and (max-width: 1200px) {
+    /*Tablets [601px -> 1200px]*/
+    .task-list {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    /*Big smartphones [426px -> 600px]*/
+    .task-list {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    /*Small smartphones [325px -> 425px]*/
+    .task-list {
+        width: 100%;
+    }
+}
