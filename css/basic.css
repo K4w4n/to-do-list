@@ -41,6 +41,7 @@ body {
     border-radius: 10px 0px 0px 10px;
     border-width: 2px;
     border-color: #fff;
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
@@ -69,12 +70,11 @@ body {
     border-radius: 0px 10px 10px 0px;
     border-width: 2px 2px 2px 0px;
     border-color: #fff;
-    background-color: rgb(255, 255, 255);
 }
 
 .titulo-tarefa {
     margin-left: 5px;
-    color: #8B8FC2;
+    color: #fff;
 }
 
 .bola {
@@ -82,6 +82,7 @@ body {
     background-color: #8B8FC2;
     width: 5px;
     height: 5px;
+    background-color: #fff;
 }
 
 .linha {
@@ -200,22 +201,16 @@ body {
     background-color: rgba(255, 255, 255, 0.616);
 }
 
-.checked>.checkebox-visual {
-    border-color: #fff;
-    background-color: #fff;
-}
-
 .checked>.title-area {
-    border-color: #fff;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: #fff;
 }
 
 .checked>.title-area>.config>.bola {
-    background-color: #fff;
+    background-color: #8B8FC2;
 }
 
 .checked>.title-area>.titulo-tarefa {
-    color: #fff;
+    color: #8B8FC2;
 }
 
 @media only screen and (max-width: 1200px) {
